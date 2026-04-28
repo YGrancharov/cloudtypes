@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salesforce Sales Cloud Implementation Partner | HSM</title>
+<meta name="description" content="HSM is a certified Salesforce Sales Cloud implementation partner. We help B2B teams close more deals with smarter CRM and pipeline automation. Get a free consultation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a Salesforce Sales Cloud implementation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A standard Sales Cloud implementation with HSM typically takes 4-8 weeks depending on data migration complexity, integrations and custom workflows. Smaller deployments can go live in as little as 3 weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a Salesforce Sales Cloud implementation partner do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A certified Salesforce implementation partner like HSM handles the full deployment: discovery and requirements gathering, configuration, data migration, integrations, user training and post-launch support."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Salesforce partner or can I implement Sales Cloud myself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While self-implementation is possible, most businesses see significantly better ROI and faster adoption when working with a certified partner. HSM brings experience across dozens of Sales Cloud deployments, reducing implementation risk and cutting time to value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Sales Cloud integrate with our existing tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Sales Cloud connects with hundreds of tools including Microsoft 365, Google Workspace, SAP, ERP systems and more via native connectors. HSM maps your full integration landscape during discovery to ensure a seamless tech stack from day one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What industries does HSM serve with Sales Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HSM has delivered Sales Cloud implementations across media, manufacturing, technology, consumer goods and professional services. Each deployment is tailored to the specific workflows and requirements of the industry."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --yellow:    #FFEE1C;
+    --green:     #00BB7E;
+    --yellow-lt: #FFF9A6;
+    --green-lt:  #29CF8E;
+    --dark:      #252A36;
+    --black:     #0F1319;
+    --white:     #FFFFFF;
+    --off-white: #FAFAFA;
+    --gray:      #838A99;
+    --gray-lt:   #CCCBCB;
+    --gray-bg:   #F3F2F2;
+    --border:    rgba(37,42,54,0.12);
+
+    --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+
+    --radius: 4px;
+    --max-w: 1080px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--dark); text-decoration: none;
+  }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+
+  /* cloud dropdown */
+  .cloud-dropdown { position: relative; }
+  .cloud-dropdown-btn {
+    background: transparent; border: 1px solid var(--border);
+    font-family: var(--font-body); font-size: 13px; font-weight: 400;
+    color: var(--dark); padding: 8px 14px;
+    border-radius: var(--radius); cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+  }
+  .cloud-dropdown-btn:hover { border-color: var(--dark); }
+  .cloud-dropdown-btn .chevron {
+    font-size: 10px; color: var(--gray);
+    transition: transform 0.2s; display: inline-block;
+  }
+  .cloud-dropdown.open .chevron { transform: rotate(180deg); }
+  .cloud-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10); overflow: hidden; z-index: 200;
+  }
+  .cloud-dropdown.open .cloud-dropdown-menu { display: block; }
+  .cloud-dropdown-menu a {
+    display: block; padding: 11px 16px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 400;
+    color: var(--dark); text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  .cloud-dropdown-menu a:last-child { border-bottom: none; }
+  .cloud-dropdown-menu a:hover { background: var(--gray-bg); }
+  .cloud-dropdown-menu a.active { font-weight: 500; color: var(--green); }
+
+  .nav-cta {
+    background: var(--dark); color: var(--white);
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    padding: 9px 20px; border: none; cursor: pointer;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.2s;
+    border-radius: var(--radius);
+  }
+  .nav-cta:hover { background: var(--green); }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+    padding: 80px 2rem 0;
+  }
+  .hero-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: end;
+    min-height: 480px;
+  }
+  .hero-copy {
+    padding-bottom: 72px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--green); display: inline-block; flex-shrink: 0;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 88px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 28px;
+  }
+  h1 .accent { color: var(--green); }
+  .hero-sub {
+    font-size: 17px; font-weight: 300;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--dark); color: var(--white);
+    font-family: var(--font-body); font-size: 14px; font-weight: 500;
+    padding: 13px 26px; border: 2px solid var(--dark); cursor: pointer;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; border-radius: var(--radius);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--green); border-color: var(--green); }
+  .btn-ghost {
+    background: transparent; color: var(--dark);
+    font-family: var(--font-body); font-size: 14px; font-weight: 400;
+    padding: 13px 26px; border: 2px solid var(--dark); cursor: pointer;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; border-radius: var(--radius);
+  }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+  /* HSM impulse shape */
+  .hero-impulse {
+    position: relative;
+    align-self: stretch;
+    display: flex; align-items: flex-end;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+  .impulse-svg {
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+  }
+  .hero-stat-overlay {
+    position: relative; z-index: 2;
+    padding: 0 0 72px 40px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .hero-stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    display: flex; align-items: baseline; gap: 10px;
+    width: fit-content;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 700;
+    color: var(--dark); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 12px; color: var(--gray); font-weight: 300;
+  }
+
+  /* ── SHARED SECTION ──────────────────────────── */
+  section { max-width: var(--max-w); margin: 0 auto; padding: 80px 2rem; }
+  .section-tag {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-tag::before {
+    content: ''; width: 20px; height: 2px;
+    background: var(--green); display: inline-block; flex-shrink: 0;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700; text-transform: uppercase;
+    line-height: 0.95; letter-spacing: -0.01em;
+    color: var(--dark); margin-bottom: 20px;
+  }
+  .lead {
+    font-size: 17px; font-weight: 300;
+    color: var(--gray); line-height: 1.75;
+    max-width: 600px;
+  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 2rem; }
+
+  /* ── WHAT WE DO ──────────────────────────────── */
+  .what-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; margin-top: 48px; align-items: start;
+  }
+  .what-body p {
+    font-size: 15px; font-weight: 300;
+    color: var(--dark); line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .what-body p:last-child { margin-bottom: 0; }
+  .what-list { display: flex; flex-direction: column; gap: 0; }
+  .what-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .what-item:first-child { border-top: 1px solid var(--border); }
+  .what-num {
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.05em;
+    min-width: 28px; padding-top: 2px;
+  }
+  .what-item-text strong {
+    display: block; font-size: 14px; font-weight: 500;
+    color: var(--dark); margin-bottom: 3px;
+  }
+  .what-item-text span {
+    font-size: 13px; font-weight: 300; color: var(--gray);
+  }
+
+  /* ── BENEFITS ────────────────────────────────── */
+  .benefits-wrap { background: var(--dark); }
+  .benefits-wrap section { padding: 80px 2rem; }
+  .benefits-wrap .section-tag { color: rgba(255,255,255,0.35); }
+  .benefits-wrap h2 { color: var(--white); }
+  .benefits-wrap .lead { color: rgba(255,255,255,0.45); }
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 48px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .benefit-card {
+    padding: 32px 28px;
+    border-right: 1px solid rgba(255,255,255,0.10);
+    transition: background 0.2s;
+  }
+  .benefit-card:nth-child(3n) { border-right: none; }
+  .benefit-card:hover { background: rgba(255,255,255,0.04); }
+  .benefit-num {
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 700;
+    color: var(--green); letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.01em;
+    color: var(--white); margin-bottom: 12px; line-height: 1.1;
+  }
+  .benefit-card p {
+    font-size: 13px; font-weight: 300;
+    color: rgba(255,255,255,0.5); line-height: 1.7;
+  }
+
+  /* ── PROCESS ─────────────────────────────────── */
+  .process-wrap { background: var(--gray-bg); }
+  .process-wrap section { padding: 80px 2rem; }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 48px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .process-step {
+    padding: 32px 24px;
+    border-right: 1px solid var(--border);
+    background: var(--white);
+    position: relative;
+  }
+  .process-step:last-child { border-right: none; }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 700;
+    color: var(--yellow); line-height: 1;
+    margin-bottom: 16px;
+    -webkit-text-stroke: 1px var(--dark);
+    paint-order: stroke fill;
+  }
+  .step-title {
+    font-size: 14px; font-weight: 500;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: 13px; font-weight: 300;
+    color: var(--gray); line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .step-week {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--green);
+  }
+
+  /* ── INDUSTRIES ──────────────────────────────── */
+  .industry-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .industry-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+    transition: border-color 0.2s;
+  }
+  .industry-card:hover { border-color: var(--green); }
+  .industry-name {
+    font-size: 14px; font-weight: 500;
+    color: var(--dark); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .industry-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); flex-shrink: 0;
+  }
+  .industry-card p {
+    font-size: 13px; font-weight: 300;
+    color: var(--gray); line-height: 1.65;
+  }
+
+  /* ── CASE STUDY ──────────────────────────────── */
+  .case-wrap { background: var(--white); }
+  .case-wrap section { padding: 80px 2rem; }
+  .case-tabs { display: flex; gap: 0; margin-top: 48px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .case-tab {
+    flex: 1; padding: 14px 20px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 400;
+    color: var(--gray); background: var(--off-white);
+    border: none; border-right: 1px solid var(--border);
+    cursor: pointer; transition: all 0.15s; text-align: left;
+  }
+  .case-tab:last-child { border-right: none; }
+  .case-tab.active {
+    background: var(--dark); color: var(--white); font-weight: 500;
+  }
+  .case-tab:hover:not(.active) { background: var(--gray-bg); color: var(--dark); }
+  .case-panel { display: none; margin-top: 1px; }
+  .case-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding-top: 40px; }
+  .case-client {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 16px;
+  }
+  .case-headline {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 700; text-transform: uppercase;
+    color: var(--dark); line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .case-body {
+    font-size: 14px; font-weight: 300;
+    color: var(--gray); line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .case-link {
+    font-size: 13px; font-weight: 500;
+    color: var(--dark); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    border-bottom: 2px solid var(--green); padding-bottom: 2px;
+    transition: color 0.15s;
+  }
+  .case-link:hover { color: var(--green); }
+  .case-stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .case-stat-box {
+    background: var(--dark);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+  }
+  .case-stat-num {
+    font-family: var(--font-display);
+    font-size: 44px; font-weight: 700;
+    color: var(--yellow); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .case-stat-label {
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  /* ── FAQ ─────────────────────────────────────── */
+  .faq-wrap { background: var(--gray-bg); }
+  .faq-wrap section { padding: 80px 2rem; }
+  .faq-list { margin-top: 48px; display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; background: none; border: none;
+    text-align: left; padding: 20px 0;
+    font-family: var(--font-body); font-size: 15px; font-weight: 500;
+    color: var(--dark); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--green); }
+  .faq-icon {
+    font-size: 18px; color: var(--gray);
+    transition: transform 0.25s; flex-shrink: 0;
+    font-weight: 300; line-height: 1;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--green); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.2s;
+    font-size: 14px; font-weight: 300;
+    color: var(--gray); line-height: 1.75;
+    padding: 0;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+  /* ── RELATED ─────────────────────────────────── */
+  .related-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .related-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 20px;
+    text-decoration: none; display: block;
+    transition: border-color 0.2s;
+  }
+  .related-card:hover { border-color: var(--dark); }
+  .related-type {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 10px;
+  }
+  .related-title {
+    font-size: 14px; font-weight: 400;
+    color: var(--dark); line-height: 1.4;
+  }
+
+  /* ── CTA FOOTER ──────────────────────────────── */
+  .cta-wrap { background: var(--dark); position: relative; overflow: hidden; }
+  .cta-wrap section { padding: 96px 2rem; position: relative; z-index: 1; }
+  .cta-impulse {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 50%; opacity: 0.15;
+  }
+  .cta-inner { max-width: 600px; }
+  .cta-wrap .section-tag { color: rgba(255,255,255,0.3); }
+  .cta-wrap h2 { color: var(--white); margin-bottom: 16px; }
+  .cta-wrap .lead { color: rgba(255,255,255,0.45); margin-bottom: 36px; }
+  .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-accent {
+    background: var(--yellow); color: var(--dark);
+    font-family: var(--font-body); font-size: 14px; font-weight: 500;
+    padding: 13px 26px; border: 2px solid var(--yellow); cursor: pointer;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; border-radius: var(--radius);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-accent:hover { background: var(--green); border-color: var(--green); color: var(--white); }
+  .btn-outline-white {
+    background: transparent; color: rgba(255,255,255,0.6);
+    font-family: var(--font-body); font-size: 14px; font-weight: 400;
+    padding: 13px 26px; border: 2px solid rgba(255,255,255,0.2); cursor: pointer;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; border-radius: var(--radius);
+  }
+  .btn-outline-white:hover { border-color: var(--white); color: var(--white); }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--black);
+    padding: 32px 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 300; }
+
+  /* ── ANIMATION ───────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero-inner, .what-grid, .case-panel.active { grid-template-columns: 1fr; }
+    .hero-impulse { display: none; }
+    .benefits-grid, .process-steps, .industry-grid, .case-stats-grid, .related-grid { grid-template-columns: 1fr 1fr; }
+    .benefit-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
+    .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+    section { padding: 56px 1.25rem; }
+    .case-tabs { flex-wrap: wrap; }
+  }
+  @media (max-width: 480px) {
+    .benefits-grid, .related-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">HSM</a>
+  <div class="nav-right">
+    <div class="cloud-dropdown" id="cloudDropdown">
+      <button class="cloud-dropdown-btn" onclick="toggleDropdown()">
+        Sales Cloud <span class="chevron">▾</span>
+      </button>
+      <div class="cloud-dropdown-menu">
+        <a href="sales-cloud.html" class="active">Sales Cloud</a>
+        <a href="service-cloud.html">Service Cloud</a>
+        <a href="marketing-cloud.html">Marketing Cloud</a>
+        <a href="commerce-cloud.html">Commerce Cloud</a>
+        <a href="data-cloud.html">Data Cloud</a>
+        <a href="experience-cloud.html">Experience Cloud</a>
+      </div>
+    </div>
+    <a href="/en/contact/" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Salesforce Sales Cloud</div>
+      <h1>Your pipeline.<br><span class="accent">Better.</span></h1>
+      <p class="hero-sub">HSM is a certified Salesforce partner with 30 years of experience. We implement Sales Cloud to give your team a single system for managing leads, tracking deals and making decisions based on facts - not intuition.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Talk to us →</a>
+        <a href="#process" class="btn-ghost">See our process</a>
+      </div>
+    </div>
+    <div class="hero-impulse">
+      <svg class="impulse-svg" viewBox="0 0 520 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="imp1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFEE1C"/>
+            <stop offset="100%" stop-color="#00BB7E"/>
+          </linearGradient>
+        </defs>
+        <path d="M520,0 L520,480 L0,480 L0,320
+          C60,320 100,270 120,220
+          C150,150 130,80 200,60
+          C260,42 310,90 340,140
+          C370,190 390,240 440,250
+          C470,255 500,240 520,220 Z"
+          fill="url(#imp1)" opacity="0.9"/>
+      </svg>
+      <div class="hero-stat-overlay">
+        <div class="hero-stat">
+          <div class="hero-stat-num">4×</div>
+          <div class="hero-stat-label">Sales increase - Greyp Bikes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">30+</div>
+          <div class="hero-stat-label">Salesforce certifications</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">30yr</div>
+          <div class="hero-stat-label">Consulting experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT WE DO -->
+<section>
+  <div class="section-tag">What we do</div>
+  <h2>Sales Cloud,<br>deployed right</h2>
+  <div class="what-grid">
+    <div class="what-body">
+      <p>Salesforce Sales Cloud is the world's leading sales CRM - but between a mediocre deployment and a genuinely useful one, the difference is in how it's built for your team. HSM brings deep hands-on experience across B2B organisations to design a Sales Cloud setup that fits your pipeline, your people and your industry.</p>
+      <p>We don't hand you a default system and walk away. We map your existing sales process, identify automation opportunities and build something your reps will actually use - with intelligent automation handling the repetitive work so they can focus on closing.</p>
+      <p>From first call to go-live, we stay close. Your team gets comprehensive training, cleanly migrated data and a post-launch support window so nothing falls through the cracks.</p>
+    </div>
+    <div class="what-list">
+      <div class="what-item">
+        <div class="what-num">01</div>
+        <div class="what-item-text">
+          <strong>Custom configuration</strong>
+          <span>Built around your sales stages - not a generic template</span>
+        </div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">02</div>
+        <div class="what-item-text">
+          <strong>Data migration</strong>
+          <span>Clean validated transfer from your existing CRM or spreadsheets</span>
+        </div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">03</div>
+        <div class="what-item-text">
+          <strong>Integration mapping</strong>
+          <span>Connect Sales Cloud to your ERP, marketing tools and comms stack</span>
+        </div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">04</div>
+        <div class="what-item-text">
+          <strong>Team training and adoption</strong>
+          <span>Role-based training that drives real adoption - not shelf-ware</span>
+        </div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">05</div>
+        <div class="what-item-text">
+          <strong>Post-launch support</strong>
+          <span>Dedicated hypercare window and ongoing support as your needs evolve</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<div class="benefits-wrap">
+  <section>
+    <div class="section-tag">Key benefits</div>
+    <h2>What Sales Cloud<br>gives your team</h2>
+    <p class="lead">Beyond storing contacts, Sales Cloud becomes the operating system for your entire revenue function - from first touch to closed won.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-num">01</div>
+        <h3>Full pipeline visibility</h3>
+        <p>Every deal, every stage, every rep - in one live view. Managers get accurate forecasting and early warning on at-risk opportunities before they go cold.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">02</div>
+        <h3>Smarter lead management</h3>
+        <p>Capture, score and route leads from any source automatically. No more manual assignment or lost inbound. Every lead gets the right rep at the right moment.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">03</div>
+        <h3>Workflow automation</h3>
+        <p>Automate follow-ups, task assignments and approval processes end to end. Your reps spend time on relationships - not on administrative tasks.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">04</div>
+        <h3>Revenue forecasting</h3>
+        <p>Move from gut-feel forecasting to data-backed projections. Analyse historical patterns, deal velocity and engagement signals to predict revenue with accuracy.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">05</div>
+        <h3>Seamless integrations</h3>
+        <p>Sales Cloud connects with Microsoft 365, Google Workspace, LinkedIn, Slack and hundreds of other tools - so your reps work in the systems they already know.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">06</div>
+        <h3>360-degree customer view</h3>
+        <p>Every interaction, note and piece of history about a customer or company - visible to everyone at all times. No more confusion, no more data lost in emails.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROCESS -->
+<div class="process-wrap">
+  <section id="process">
+    <div class="section-tag">Our approach</div>
+    <h2>From signed contract<br>to live in weeks</h2>
+    <p class="lead">A proven four-phase process that balances speed with quality. Most HSM Sales Cloud deployments are live within 4-8 weeks.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Discovery</div>
+        <div class="step-desc">We map your current sales process, data model, integrations and team workflows in full detail. No assumptions.</div>
+        <div class="step-week">Weeks 1-2</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Configure and build</div>
+        <div class="step-desc">Custom fields, automations, dashboards and integrations are built and thoroughly tested before any data moves.</div>
+        <div class="step-week">Weeks 2-5</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Data migration</div>
+        <div class="step-desc">Existing contacts, accounts and opportunity history are cleaned, mapped and migrated cleanly into the new system.</div>
+        <div class="step-week">Weeks 4-6</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Train and launch</div>
+        <div class="step-desc">Role-based training, go-live support and a 30-day hypercare window to ensure your team is confident from day one.</div>
+        <div class="step-week">Weeks 6-8</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider">
+
+<!-- INDUSTRIES -->
+<section>
+  <div class="section-tag">Industry use cases</div>
+  <h2>Sales Cloud for<br>your industry</h2>
+  <p class="lead">We tailor every deployment to the specific sales workflows, buyer journeys and requirements of your sector.</p>
+  <div class="industry-grid">
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Manufacturing</div>
+      <p>Configure Sales Cloud for long-cycle multi-stakeholder deals. Manage distributor relationships, channel partners and complex quoting with CPQ integration.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Media and publishing</div>
+      <p>Track advertising inventory, manage brand accounts across multiple titles and automate offer creation using Salesforce templates. As implemented for 24sata.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Consumer goods</div>
+      <p>Build partner networks, track dealership pipelines and gain real-time visibility into marketing-generated leads. As implemented for Greyp Bikes.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Technology and scale-ups</div>
+      <p>Fast-track deployments designed for growth-stage companies moving off spreadsheets. Get Sales Cloud live in weeks with a clean foundation to scale on.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Professional services</div>
+      <p>Track engagements, manage proposals and forecast project pipeline alongside standard CRM - with custom objects built for services-led selling.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Multi-company groups</div>
+      <p>One system to connect multiple entities each with their own processes and needs. A single source of truth for the entire group. As implemented for NEXE Group.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CASE STUDIES -->
+<div class="case-wrap">
+  <section>
+    <div class="section-tag">Client results</div>
+    <h2>Results our clients<br>actually achieved</h2>
+    <div class="case-tabs">
+      <button class="case-tab active" onclick="showCase('greyp', this)">Greyp Bikes</button>
+      <button class="case-tab" onclick="showCase('sata', this)">24sata</button>
+      <button class="case-tab" onclick="showCase('nexe', this)">NEXE Group</button>
+    </div>
+
+    <div id="case-greyp" class="case-panel active">
+      <div>
+        <div class="case-client">Client since 2019 - Technology / Consumer goods</div>
+        <div class="case-headline">Greyp Bikes: From scattered data to 4x sales growth</div>
+        <p class="case-body">Greyp Bikes - a sister company of Rimac Automobili - creates the world's first fully connected e-bike, selling across 30 countries. Their challenge: no real marketing overview after events and campaigns, no pipeline visibility and no systematic way to track customer data. Forecasting growth and building a quality partner network was nearly impossible.<br><br>HSM implemented Sales Cloud to establish a frictionless customer journey from first contact to after-sales support. Sales activity tracking, real-time reporting and automated email logging replaced a mix of spreadsheets and inbox-based processes.</p>
+        <a href="https://www.hsm360.com/en/case-study/greyp-case-study/" class="case-link" target="_blank">Read full case study →</a>
+      </div>
+      <div class="case-stats-grid">
+        <div class="case-stat-box">
+          <div class="case-stat-num">4×</div>
+          <div class="case-stat-label">Increase in sales</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">360°</div>
+          <div class="case-stat-label">Customer data view</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">30</div>
+          <div class="case-stat-label">Countries reached</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">100%</div>
+          <div class="case-stat-label">Automated reporting</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="case-sata" class="case-panel">
+      <div>
+        <div class="case-client">Client since 2017 - Media and publishing</div>
+        <div class="case-headline">24sata: One system for 2 million daily readers</div>
+        <p class="case-body">24sata is the region's largest media house with numerous specialized brands and a daily reach of 2 million people. With many brands under one roof, information was scattered across different systems and channels. There was no single place to track all sales activities - making in-depth reporting and data-driven decisions impossible.<br><br>HSM built a singular database of products and contacts as the foundation, created sales activity reports and financial dashboards and automated data exchange between systems. Salesforce became the centre of all activities.</p>
+        <a href="https://www.hsm360.com/en/case-study/24sata-case-study/" class="case-link" target="_blank">Read full case study →</a>
+      </div>
+      <div class="case-stats-grid">
+        <div class="case-stat-box">
+          <div class="case-stat-num">2M</div>
+          <div class="case-stat-label">Daily reach managed</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">1</div>
+          <div class="case-stat-label">System for all brands</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">100%</div>
+          <div class="case-stat-label">Automated data exchange</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">Real-time</div>
+          <div class="case-stat-label">Sales reporting</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="case-nexe" class="case-panel">
+      <div>
+        <div class="case-client">Case study - Multi-company group</div>
+        <div class="case-headline">NEXE Group: 16 companies, one connected system</div>
+        <p class="case-body">NEXE Group is a group of 16 companies each with its own processes and needs. Managing sales activities and data across such a diverse group without a single connected system created blind spots at the group level and inefficiencies at every company level.<br><br>HSM deployed Sales Cloud as the single system to connect the entire group - enabling shared visibility while respecting the distinct processes of each entity. One platform. One source of truth.</p>
+        <a href="https://www.hsm360.com/en/case-study/nexe-group-case-study/" class="case-link" target="_blank">Read full case study →</a>
+      </div>
+      <div class="case-stats-grid">
+        <div class="case-stat-box">
+          <div class="case-stat-num">16</div>
+          <div class="case-stat-label">Companies connected</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">1</div>
+          <div class="case-stat-label">Unified platform</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">Full</div>
+          <div class="case-stat-label">Group-level visibility</div>
+        </div>
+        <div class="case-stat-box">
+          <div class="case-stat-num">Custom</div>
+          <div class="case-stat-label">Per-entity processes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider">
+
+<!-- FAQ -->
+<div class="faq-wrap">
+  <section id="faq">
+    <div class="section-tag">Frequently asked questions</div>
+    <h2>Common questions about<br>Sales Cloud implementation</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does a Salesforce Sales Cloud implementation take?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">A standard Sales Cloud implementation with HSM typically takes 4-8 weeks depending on data migration complexity, integrations and custom workflows. Smaller deployments can go live in as little as 3 weeks. We give you a precise timeline after our initial discovery session.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What does a Salesforce Sales Cloud implementation partner do?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">A certified Salesforce implementation partner like HSM handles the full deployment: discovery and requirements gathering, configuration, data migration, integrations, user training and post-launch support - so your team gets up and running fast without the trial and error.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need a Salesforce partner or can I implement Sales Cloud myself?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Self-implementation is technically possible but most businesses see significantly better ROI and faster adoption when working with a certified partner. HSM brings experience across dozens of Sales Cloud deployments reducing implementation risk and cutting time to value.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can Sales Cloud integrate with our existing tools?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes. Sales Cloud connects with hundreds of tools including Microsoft 365, Google Workspace, SAP, ERP systems and more via native connectors. HSM maps your full integration landscape during discovery to ensure a seamless tech stack from day one.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What industries does HSM serve with Sales Cloud?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">HSM has delivered Sales Cloud implementations across media, manufacturing, consumer goods, technology and multi-company groups. Notable clients include Greyp Bikes, 24sata and NEXE Group. Each deployment is tailored to the specific workflows and requirements of the industry.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- CTA FOOTER -->
+<div class="cta-wrap" id="contact">
+  <svg class="cta-impulse" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="imp2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFEE1C"/>
+        <stop offset="100%" stop-color="#00BB7E"/>
+      </linearGradient>
+    </defs>
+    <path d="M600,0 L600,500 L100,500
+      C180,500 240,430 260,360
+      C290,260 250,160 340,100
+      C400,60 480,80 540,120
+      C570,140 590,170 600,200 Z"
+      fill="url(#imp2)"/>
+  </svg>
+  <section>
+    <div class="cta-inner">
+      <div class="section-tag">Get started</div>
+      <h2>Ready to build a pipeline that works?</h2>
+      <p class="lead">Book a free consultation with an HSM Salesforce consultant. We will assess your current setup and outline exactly what a Sales Cloud deployment would look like for your team.</p>
+      <div class="cta-actions">
+        <a href="mailto:hello@hsm360.com" class="btn-accent">Book a free consultation →</a>
+        <a href="/en/contact/" class="btn-outline-white">Contact us</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" style="font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);text-decoration:none;">HSM</a>
+  <div class="footer-copy">HSM &copy; 2026 &nbsp;|&nbsp; Grada Mainza 19, 10000 Zagreb, HR</div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function showCase(id, tab) {
+  document.querySelectorAll('.case-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.case-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('case-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+
+function toggleDropdown() {
+  document.getElementById('cloudDropdown').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('cloudDropdown');
+  if (!dd.contains(e.target)) dd.classList.remove('open');
+});
+</script>
+
+</body>
+</html>

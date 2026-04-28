@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salesforce Experience Cloud Implementation Partner | HSM</title>
+<meta name="description" content="HSM is a certified Salesforce Experience Cloud implementation partner. We build branded customer portals, partner communities and employee hubs that connect directly to your Salesforce CRM data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow:    #FFEE1C;
+    --green:     #00BB7E;
+    --dark:      #252A36;
+    --black:     #0F1319;
+    --white:     #FFFFFF;
+    --off-white: #FAFAFA;
+    --gray:      #838A99;
+    --gray-bg:   #F3F2F2;
+    --border:    rgba(37,42,54,0.12);
+    --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+    --radius: 4px;
+    --max-w: 1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--dark); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .nav-logo { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dark); text-decoration: none; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .cloud-dropdown { position: relative; }
+  .cloud-dropdown-btn { background: transparent; border: 1px solid var(--border); font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--dark); padding: 8px 14px; border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: border-color 0.15s; white-space: nowrap; }
+  .cloud-dropdown-btn:hover { border-color: var(--dark); }
+  .cloud-dropdown-btn .chevron { font-size: 10px; color: var(--gray); transition: transform 0.2s; display: inline-block; }
+  .cloud-dropdown.open .chevron { transform: rotate(180deg); }
+  .cloud-dropdown-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); min-width: 200px; box-shadow: 0 8px 24px rgba(0,0,0,0.10); overflow: hidden; z-index: 200; }
+  .cloud-dropdown.open .cloud-dropdown-menu { display: block; }
+  .cloud-dropdown-menu a { display: block; padding: 11px 16px; font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--border); transition: background 0.12s; }
+  .cloud-dropdown-menu a:last-child { border-bottom: none; }
+  .cloud-dropdown-menu a:hover { background: var(--gray-bg); }
+  .cloud-dropdown-menu a.active { font-weight: 500; color: var(--green); }
+  .nav-cta { background: var(--dark); color: var(--white); font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 9px 20px; border: none; cursor: pointer; text-decoration: none; letter-spacing: 0.02em; transition: background 0.2s; border-radius: var(--radius); }
+  .nav-cta:hover { background: var(--green); }
+
+  .hero { position: relative; overflow: hidden; background: var(--white); padding: 80px 2rem 0; }
+  .hero-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: end; min-height: 480px; }
+  .hero-copy { padding-bottom: 72px; animation: fadeUp 0.6s ease both; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--green); display: inline-block; flex-shrink: 0; }
+  h1 { font-family: var(--font-display); font-size: clamp(56px, 7vw, 88px); font-weight: 700; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; color: var(--dark); margin-bottom: 28px; }
+  h1 .accent { color: var(--green); }
+  .hero-sub { font-size: 17px; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--dark); color: var(--white); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 26px; border: 2px solid var(--dark); cursor: pointer; text-decoration: none; letter-spacing: 0.03em; transition: all 0.2s; border-radius: var(--radius); display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: var(--green); border-color: var(--green); }
+  .btn-ghost { background: transparent; color: var(--dark); font-family: var(--font-body); font-size: 14px; font-weight: 400; padding: 13px 26px; border: 2px solid var(--dark); cursor: pointer; text-decoration: none; letter-spacing: 0.03em; transition: all 0.2s; border-radius: var(--radius); }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+  .hero-impulse { position: relative; align-self: stretch; display: flex; align-items: flex-end; animation: fadeUp 0.6s 0.15s ease both; }
+  .impulse-svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+  .hero-stat-overlay { position: relative; z-index: 2; padding: 0 0 72px 40px; display: flex; flex-direction: column; gap: 10px; }
+  .hero-stat { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; display: flex; align-items: baseline; gap: 10px; width: fit-content; }
+  .hero-stat-num { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--dark); line-height: 1; }
+  .hero-stat-label { font-size: 12px; color: var(--gray); font-weight: 300; }
+
+  section { max-width: var(--max-w); margin: 0 auto; padding: 80px 2rem; }
+  .section-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .section-tag::before { content: ''; width: 20px; height: 2px; background: var(--green); display: inline-block; flex-shrink: 0; }
+  h2 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.01em; color: var(--dark); margin-bottom: 20px; }
+  .lead { font-size: 17px; font-weight: 300; color: var(--gray); line-height: 1.75; max-width: 600px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 2rem; }
+
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 48px; align-items: start; }
+  .what-body p { font-size: 15px; font-weight: 300; color: var(--dark); line-height: 1.8; margin-bottom: 18px; }
+  .what-body p:last-child { margin-bottom: 0; }
+  .what-list { display: flex; flex-direction: column; }
+  .what-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .what-item:first-child { border-top: 1px solid var(--border); }
+  .what-num { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.05em; min-width: 28px; padding-top: 2px; }
+  .what-item-text strong { display: block; font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 3px; }
+  .what-item-text span { font-size: 13px; font-weight: 300; color: var(--gray); }
+
+  .benefits-wrap { background: var(--dark); }
+  .benefits-wrap section { padding: 80px 2rem; }
+  .benefits-wrap .section-tag { color: rgba(255,255,255,0.35); }
+  .benefits-wrap h2 { color: var(--white); }
+  .benefits-wrap .lead { color: rgba(255,255,255,0.45); }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 48px; border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius); overflow: hidden; }
+  .benefit-card { padding: 32px 28px; border-right: 1px solid rgba(255,255,255,0.10); transition: background 0.2s; }
+  .benefit-card:nth-child(3n) { border-right: none; }
+  .benefit-card:hover { background: rgba(255,255,255,0.04); }
+  .benefit-num { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--green); letter-spacing: 0.08em; margin-bottom: 20px; }
+  h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; color: var(--white); margin-bottom: 12px; line-height: 1.1; }
+  .benefit-card p { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+  .process-wrap { background: var(--gray-bg); }
+  .process-wrap section { padding: 80px 2rem; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .process-step { padding: 32px 24px; border-right: 1px solid var(--border); background: var(--white); }
+  .process-step:last-child { border-right: none; }
+  .step-num { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--yellow); line-height: 1; margin-bottom: 16px; -webkit-text-stroke: 1px var(--dark); paint-order: stroke fill; }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 8px; }
+  .step-desc { font-size: 13px; font-weight: 300; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+  .step-week { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+
+  .industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .industry-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; transition: border-color 0.2s; }
+  .industry-card:hover { border-color: var(--green); }
+  .industry-name { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .industry-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .industry-card p { font-size: 13px; font-weight: 300; color: var(--gray); line-height: 1.65; }
+
+  .case-wrap section { padding: 80px 2rem; }
+  .case-tabs { display: flex; gap: 0; margin-top: 48px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .case-tab { flex: 1; padding: 14px 20px; font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--gray); background: var(--off-white); border: none; border-right: 1px solid var(--border); cursor: pointer; transition: all 0.15s; text-align: left; }
+  .case-tab:last-child { border-right: none; }
+  .case-tab.active { background: var(--dark); color: var(--white); font-weight: 500; }
+  .case-tab:hover:not(.active) { background: var(--gray-bg); color: var(--dark); }
+  .case-panel { display: none; }
+  .case-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding-top: 40px; }
+  .case-client { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+  .case-headline { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; text-transform: uppercase; color: var(--dark); line-height: 1.05; margin-bottom: 20px; }
+  .case-body { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.75; margin-bottom: 24px; }
+  .case-link { font-size: 13px; font-weight: 500; color: var(--dark); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 2px solid var(--green); padding-bottom: 2px; transition: color 0.15s; }
+  .case-link:hover { color: var(--green); }
+  .case-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .case-stat-box { background: var(--dark); border-radius: var(--radius); padding: 24px 20px; }
+  .case-stat-num { font-family: var(--font-display); font-size: 44px; font-weight: 700; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
+  .case-stat-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .faq-wrap { background: var(--gray-bg); }
+  .faq-wrap section { padding: 80px 2rem; }
+  .faq-list { margin-top: 48px; display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 20px 0; font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.15s; }
+  .faq-q:hover { color: var(--green); }
+  .faq-icon { font-size: 18px; color: var(--gray); transition: transform 0.25s; flex-shrink: 0; font-weight: 300; line-height: 1; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--green); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.2s; font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.75; padding: 0; }
+  .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+  .cta-wrap { background: var(--dark); position: relative; overflow: hidden; }
+  .cta-wrap section { padding: 96px 2rem; position: relative; z-index: 1; }
+  .cta-impulse { position: absolute; right: 0; top: 0; bottom: 0; width: 50%; opacity: 0.15; }
+  .cta-inner { max-width: 600px; }
+  .cta-wrap .section-tag { color: rgba(255,255,255,0.3); }
+  .cta-wrap h2 { color: var(--white); margin-bottom: 16px; }
+  .cta-wrap .lead { color: rgba(255,255,255,0.45); margin-bottom: 36px; }
+  .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-accent { background: var(--yellow); color: var(--dark); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 26px; border: 2px solid var(--yellow); cursor: pointer; text-decoration: none; letter-spacing: 0.03em; transition: all 0.2s; border-radius: var(--radius); display: inline-flex; align-items: center; gap: 8px; }
+  .btn-accent:hover { background: var(--green); border-color: var(--green); color: var(--white); }
+  .btn-outline-white { background: transparent; color: rgba(255,255,255,0.6); font-family: var(--font-body); font-size: 14px; font-weight: 400; padding: 13px 26px; border: 2px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; letter-spacing: 0.03em; transition: all 0.2s; border-radius: var(--radius); }
+  .btn-outline-white:hover { border-color: var(--white); color: var(--white); }
+
+  footer { background: var(--black); padding: 32px 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 300; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    .hero-inner, .what-grid, .case-panel.active { grid-template-columns: 1fr; }
+    .hero-impulse { display: none; }
+    .benefits-grid, .process-steps, .industry-grid, .case-stats-grid { grid-template-columns: 1fr 1fr; }
+    .benefit-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
+    .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+    section { padding: 56px 1.25rem; }
+    .case-tabs { flex-wrap: wrap; }
+  }
+  @media (max-width: 480px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="sales-cloud.html" class="nav-logo">HSM</a>
+  <div class="nav-right">
+    <div class="cloud-dropdown" id="cloudDropdown">
+      <button class="cloud-dropdown-btn" onclick="toggleDropdown()">
+        Experience Cloud <span class="chevron">&#9662;</span>
+      </button>
+      <div class="cloud-dropdown-menu">
+        <a href="sales-cloud.html">Sales Cloud</a>
+        <a href="service-cloud.html">Service Cloud</a>
+        <a href="marketing-cloud.html">Marketing Cloud</a>
+        <a href="commerce-cloud.html">Commerce Cloud</a>
+        <a href="data-cloud.html">Data Cloud</a>
+        <a href="experience-cloud.html" class="active">Experience Cloud</a>
+      </div>
+    </div>
+    <a href="https://www.hsm360.com/en/contact/" class="nav-cta" target="_blank">Get in touch</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Experience Cloud</div>
+      <h1>Portals that<br><span class="accent">Engage.</span></h1>
+      <p class="hero-sub">HSM is a certified Salesforce partner with 30 years of experience. We build Experience Cloud portals that give your customers, partners and employees a personalised, role-based window into your Salesforce data - branded to match your business.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Talk to us &#8594;</a>
+        <a href="#process" class="btn-ghost">See our process</a>
+      </div>
+    </div>
+    <div class="hero-impulse">
+      <svg class="impulse-svg" viewBox="0 0 520 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="imp1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFEE1C"/>
+            <stop offset="100%" stop-color="#00BB7E"/>
+          </linearGradient>
+        </defs>
+        <path d="M520,0 L520,480 L0,480 L0,320 C60,320 100,270 120,220 C150,150 130,80 200,60 C260,42 310,90 340,140 C370,190 390,240 440,250 C470,255 500,240 520,220 Z" fill="url(#imp1)" opacity="0.9"/>
+      </svg>
+      <div class="hero-stat-overlay">
+        <div class="hero-stat"><div class="hero-stat-num">30+</div><div class="hero-stat-label">Salesforce certifications held</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">30yr</div><div class="hero-stat-label">Consulting experience</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">360°</div><div class="hero-stat-label">Connected customer experiences</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section>
+  <div class="section-tag">What we do</div>
+  <h2>Experience Cloud,<br>built for your audience</h2>
+  <div class="what-grid">
+    <div class="what-body">
+      <p>Salesforce Experience Cloud lets you extend the power of your CRM to the people outside your organisation - customers who want to self-serve, partners who need to manage deals and employees who need access to shared knowledge. HSM designs and builds each portal from the ground up, configured for the specific audience it serves.</p>
+      <p>Every Experience Cloud portal HSM builds is directly connected to your live Salesforce data. Customers see their own case history and orders. Partners see their shared pipeline and resources. Employees see the tools and content relevant to their role. All with the security controls to ensure no one sees what they shouldn't.</p>
+      <p>We have built Experience Cloud portals across industries - from media companies managing reader and advertiser communities to manufacturing groups managing dealer and distributor networks. Each deployment is designed around the real workflows of the people who will use it.</p>
+    </div>
+    <div class="what-list">
+      <div class="what-item">
+        <div class="what-num">01</div>
+        <div class="what-item-text"><strong>Customer self-service portals</strong><span>Case submission, knowledge base access, order tracking and account management</span></div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">02</div>
+        <div class="what-item-text"><strong>Partner and dealer portals</strong><span>Lead sharing, deal registration, price lists and co-marketing resources</span></div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">03</div>
+        <div class="what-item-text"><strong>Employee communities</strong><span>HR documents, onboarding materials, internal knowledge and collaboration tools</span></div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">04</div>
+        <div class="what-item-text"><strong>Role-based security</strong><span>Granular access controls so every user sees exactly what is relevant to them</span></div>
+      </div>
+      <div class="what-item">
+        <div class="what-num">05</div>
+        <div class="what-item-text"><strong>Branding and UX</strong><span>Fully branded portals with your visual identity, custom layouts and mobile-responsive design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="benefits-wrap">
+  <section>
+    <div class="section-tag">Key benefits</div>
+    <h2>What Experience Cloud<br>gives your team</h2>
+    <p class="lead">A platform built to make every part of your experience operation faster, smarter and more connected.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-num">01</div>
+        <h3>Customer self-service</h3>
+        <p>Let customers submit cases, track orders and find answers without contacting your support team - reducing volume and cost.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">02</div>
+        <h3>Partner management</h3>
+        <p>Give resellers and distributors a dedicated space to register deals, access resources and collaborate with your sales team.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">03</div>
+        <h3>Employee hub</h3>
+        <p>Centralise HR materials, onboarding documents and internal knowledge in one searchable, permission-controlled portal.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">04</div>
+        <h3>Live Salesforce data</h3>
+        <p>Every portal is connected to your live CRM - so customers, partners and employees always see accurate, up-to-date information.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">05</div>
+        <h3>Role-based access</h3>
+        <p>Fine-grained permissions ensure each user type sees only what is relevant. Fully integrated with Salesforce's security model.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">06</div>
+        <h3>Branded experience</h3>
+        <p>Fully customised visual design that matches your brand identity - not a generic Salesforce template.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="process-wrap">
+  <section id="process">
+    <div class="section-tag">Our approach</div>
+    <h2>From signed contract<br>to live in weeks</h2>
+    <p class="lead">A proven deployment process that balances speed with quality. Most HSM Experience Cloud implementations are live within 4-8 weeks.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Discovery</div>
+        <div class="step-desc">We define the portal type, audience, data requirements, security model and branding guidelines before any build begins.</div>
+        <div class="step-week">Weeks 1-2</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Design and build</div>
+        <div class="step-desc">Portal structure, page layouts, components, branding and CRM data connections are built and tested with real data.</div>
+        <div class="step-week">Weeks 2-5</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Security and testing</div>
+        <div class="step-desc">Role-based permissions, authentication flows and data access rules are validated against your security requirements.</div>
+        <div class="step-week">Weeks 4-6</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Train and launch</div>
+        <div class="step-desc">Admin training, user onboarding content and a launch plan to ensure strong adoption from day one.</div>
+        <div class="step-week">Weeks 5-7</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider">
+
+<section>
+  <div class="section-tag">Industry use cases</div>
+  <h2>Experience Cloud for<br>your industry</h2>
+  <p class="lead">We tailor every deployment to the specific workflows, buyer journeys and requirements of your sector.</p>
+  <div class="industry-grid">
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Media and publishing</div>
+      <p>Reader communities, advertiser portals and editorial collaboration hubs built on top of the 24sata Salesforce foundation.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Manufacturing</div>
+      <p>Dealer and distributor portals with shared lead management, price lists, order tracking and co-marketing resources.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Technology and SaaS</div>
+      <p>Customer self-service portals with knowledge bases, licence management and support case tracking.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Consumer goods</div>
+      <p>B2C customer portals with order history, returns management and personalised product recommendations.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Multi-company groups</div>
+      <p>Employee and cross-company knowledge portals that connect teams across separate entities in the same group.</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-name"><div class="industry-dot"></div>Financial services</div>
+      <p>Client portals with secure document exchange, case tracking and advisor access - built to regulatory standards.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="case-wrap">
+  <section>
+    <div class="section-tag">Client results</div>
+    <h2>Results our clients<br>actually achieved</h2>
+    <div class="case-tabs">
+    <button class="case-tab active" onclick="showCase('sata', this)">24sata</button>
+    <button class="case-tab" onclick="showCase('nexe', this)">NEXE Group</button>
+    </div>
+    <div id="case-sata" class="case-panel active">
+      <div>
+        <div class="case-client">Client since 2017 - Media and publishing</div>
+        <div class="case-headline">24sata: A connected platform for readers, advertisers and staff</div>
+        <p class="case-body">24sata operates numerous specialised brands with a combined daily reach of 2 million people. Managing the relationships between editorial, advertising and reader-facing operations across all those brands required more than a basic CRM - it required a structured, connected platform with clear roles and data access for each part of the business.<br><br>HSM's Salesforce implementation gave 24sata the foundation to connect all teams and brands in one system. Over time, this has extended to project management tools and personnel management - making Salesforce the backbone of the entire organisation.</p>
+        <a href="https://www.hsm360.com/en/case-study/24sata-case-study/" class="case-link" target="_blank">Read full case study &#8594;</a>
+      </div>
+      <div class="case-stats-grid">
+        <div class="case-stat-box"><div class="case-stat-num">2M</div><div class="case-stat-label">Daily reach connected</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">16+</div><div class="case-stat-label">Brands in one system</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">3</div><div class="case-stat-label">Departments served</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">1</div><div class="case-stat-label">Source of truth</div></div>
+      </div>
+    </div>
+    <div id="case-nexe" class="case-panel">
+      <div>
+        <div class="case-client">Client since 2020 - Multi-company group</div>
+        <div class="case-headline">NEXE Group: 16 companies, one shared experience</div>
+        <p class="case-body">NEXE Group needed a system where 16 different companies could each operate independently while still sharing data, best practices and group-level intelligence. Each company had different processes, different product lines and different customer relationships - but the group needed to be able to coordinate marketing, measure satisfaction and run quality management across all of them.<br><br>HSM implemented Salesforce as the shared platform, with custom objects and role-based access that respected the independence of each entity while enabling real group-level visibility.</p>
+        <a href="https://www.hsm360.com/en/case-study/nexe-group-case-study/" class="case-link" target="_blank">Read full case study &#8594;</a>
+      </div>
+      <div class="case-stats-grid">
+        <div class="case-stat-box"><div class="case-stat-num">16</div><div class="case-stat-label">Companies on one platform</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">Custom</div><div class="case-stat-label">Per-entity processes</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">Full</div><div class="case-stat-label">Group-level visibility</div></div>
+        <div class="case-stat-box"><div class="case-stat-num">Automated</div><div class="case-stat-label">Document creation</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider">
+
+<div class="faq-wrap">
+  <section id="faq">
+    <div class="section-tag">Frequently asked questions</div>
+    <h2>Common questions about<br>Experience Cloud implementation</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does an Experience Cloud implementation take?<span class="faq-icon">+</span></button>
+        <div class="faq-a">An Experience Cloud portal typically takes 3-6 weeks to implement with HSM depending on the complexity of the portal, the number of user types and the data connections required. We scope a precise timeline after the discovery session.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can we build multiple different portals on Experience Cloud?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. You can run customer, partner and employee portals all from the same Salesforce org, each with its own branding, page structure and security model. HSM can scope and build all of them.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is Experience Cloud included in our Salesforce licence?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Experience Cloud licensing depends on the portal type and the number of users or logins. Customer and partner portals are typically licensed separately. HSM can advise on the right licence structure for your use case.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can the portal be fully branded to match our website?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Experience Cloud portals can be fully customised with your brand colours, fonts, layouts and components. HSM designs the UX to match your existing visual identity - not a generic Salesforce template.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What industries does HSM serve with Experience Cloud?<span class="faq-icon">+</span></button>
+        <div class="faq-a">HSM has deployed Experience Cloud portals for media companies, multi-company groups, manufacturing distributors and technology clients. Each portal is designed around the real workflows of the audience it serves.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="cta-wrap" id="contact">
+  <svg class="cta-impulse" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="imp2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFEE1C"/><stop offset="100%" stop-color="#00BB7E"/></linearGradient></defs>
+    <path d="M600,0 L600,500 L100,500 C180,500 240,430 260,360 C290,260 250,160 340,100 C400,60 480,80 540,120 C570,140 590,170 600,200 Z" fill="url(#imp2)"/>
+  </svg>
+  <section>
+    <div class="cta-inner">
+      <div class="section-tag">Get started</div>
+      <h2>Ready to give your customers and partners a better experience?</h2>
+      <p class="lead">Book a free consultation with an HSM Salesforce consultant. We will define the right portal structure for your audience and show you what Experience Cloud can deliver for your organisation.</p>
+      <div class="cta-actions">
+        <a href="https://www.hsm360.com/en/contact/" class="btn-accent" target="_blank">Book a free consultation &#8594;</a>
+        <a href="https://www.hsm360.com/en/contact/" class="btn-outline-white" target="_blank">Contact us</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <a href="sales-cloud.html" style="font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);text-decoration:none;">HSM</a>
+  <div class="footer-copy">HSM &copy; 2026 &nbsp;|&nbsp; Grada Mainza 19, 10000 Zagreb, HR</div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+function showCase(id, tab) {
+  document.querySelectorAll('.case-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.case-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('case-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+function toggleDropdown() {
+  document.getElementById('cloudDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('cloudDropdown');
+  if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
+</script>
+</body>
+</html>
